@@ -1,0 +1,18 @@
+def plot_station_counts_per_year_fuel_type(df, title, fuel_types):
+    iowa_df = df[df['State'] == 'IA']
+    
+    plt.figure(figsize=(10, 6))
+    
+    for fuel in fuel_types:
+        fuel_df = iowa_df[iowa_df['Fuel Type Code'] == fuel]
+        yearly_counts = fuel_df.groupby('Year').size()
+        plt.plot(yearly_counts.index, yearly_counts.values, linestyle='-', label=fuel)
+    
+    plt.xlabel('Year')
+    plt.ylabel('Count')
+    plt.title(title)
+    plt.legend()
+    plt.show()
+    
+fuel_types = ['ELEC', 'E85']
+plot_station_counts_per_year_fuel_type(df, "Number of new Electric & E85 fuel stations in Iowa", fuel_types)
