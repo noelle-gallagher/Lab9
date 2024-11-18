@@ -1,0 +1,13 @@
+# Define Function 3 below:
+def plot_station_counts_per_year(df):
+   
+    yearly_counts = df.groupby('Year').size()
+
+    plt.figure(figsize=(10, 6))
+    plt.plot(yearly_counts.index, yearly_counts.values, linestyle='-', color='blue')
+    plt.xlabel('Year')
+    plt.ylabel('Count')
+    plt.title('Number of alternative fuel stations in North America')
+    plt.show()
+
+plot_station_counts_per_year(df)
