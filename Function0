@@ -4,7 +4,7 @@ def load_data():
     df = pd.read_csv("stations.csv")
 
     # Filter out rows where 'Fuel Type Code' is 'LNG' or 'HY'
-    df = df[~df['Fuel Type Code'].isin(['LNG', 'HY'])]
+    df = df[(df['Fuel Type Code'] != 'LNG') & (df['Fuel Type Code'] != 'HY')]
 
     # Drop rows with missing values in 'Year' column
     df = df.dropna(subset=['Year'])
