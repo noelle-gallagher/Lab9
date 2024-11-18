@@ -1,0 +1,21 @@
+# Define load_data() function
+def load_data():
+    # Load the CSV file
+    df = pd.read_csv("stations.csv")
+
+    # Filter out rows where 'Fuel Type Code' is 'LNG' or 'HY'
+    df = df[~df['Fuel Type Code'].isin(['LNG', 'HY'])]
+
+    # Drop rows with missing values in 'Year' column
+    df = df.dropna(subset=['Year'])
+
+    # Filter out rows where 'Year' is 2022
+    df = df[df['Year'] != 2022]
+
+    return df
+
+# Call the load_data function and assign it to data
+data = load_data()
+
+# Check the shape of the DataFrame
+print(data.shape)  # Use .shape without parentheses to print rows and columns
