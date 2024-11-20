@@ -1,0 +1,27 @@
+# Location of fuel stations on the map (highlighting E85 (cyan), BD (red) and CNG (yellow)):
+
+# Function to plot the map with stations colored by fuel type
+def plot_fuel_stations(df, fueltype_colors):
+    # Create a list to store colors for each row based on fuel type
+    colors = []
+    for fuel_type in df['Fuel Type Code']:
+        if fuel_type in fueltype_colors:
+            colors.append(fueltype_colors[fuel_type])
+        else:
+            colors.append('gray')
+
+    # Plotting the stations with different colors based on fuel types
+    plt.figure(figsize=(10, 6))
+    plt.scatter(df['Longitude'], df['Latitude'], c=colors, s=1)
+    plt.title('Location of Fuel Stations on the Map (highlighting E85 (cyan), BD (red) and CNG (yellow))')
+    plt.show()
+
+# Specify the colors for different fuel types
+fueltype_colors = {
+    'E85': 'cyan',  # E85 stations in cyan
+    'BD': 'red',    # Biodiesel stations in red
+    'CNG': 'yellow' # Compressed Natural Gas in yellow
+}
+
+# Plotting the map
+plot_fuel_stations(df, fueltype_colors)
