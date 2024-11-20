@@ -1,0 +1,62 @@
+def plot_station_counts_by_state(df, 'State', 'Country'): 
+    # Filter the data to include only rows where the country is 'US' 
+    df_us = df[df['Country'] == 'US'] 
+
+    # Group by state and count the occurrences of each state 
+    state_station_counts = df_us.groupby('State').size().reset_index(name='station_count') 
+    
+    # Sort the values by 'station_count' in descending order and get the top 10
+    top_10_states = state_station_counts.sort_values(by='station_count', ascending=False).head(10)
+
+    plt.figure(figsize=(10, 6)) 
+    plt.barplot(x=state_column, y='State', data=state_station_counts) 
+    plt.title('Total Stations by US State') 
+    plt.ylabel('Number of Stations') 
+    plt.show() 
+
+def plot_e85_station_counts(df, 'State', 'Country', 'Type'): 
+    # Filter the data to include only rows where the country is 'US' or 'CA' and Type is 'E85' 
+    df_e85 = df[(df['Country'].isin(['US', 'CA'])) & (df[type_column] == 'E85')] 
+
+    # Group by state and count the occurrences of each state (E85 stations) 
+    state_station_counts = df_e85.groupby('State').size().reset_index(name='station_count') 
+
+    # Sort the data to get the top 10 states by station count 
+    state_station_counts = state_station_counts.sort_values(by='station_count', ascending=False).head(10) 
+
+    plt.figure(figsize=(10, 6)) 
+    plt.barplot(x='State', y='station_count', data=state_station_counts) 
+    plt.title('Number of E85 Stations by State/Province') 
+    plt.ylabel('Number of Stations') 
+    plt.show() 
+
+def plot_fuel_station_counts_in_iowa(df, 'State', 'City'): 
+    # Filter the data to include only rows where the state is 'IA' (Iowa) 
+    df_iowa = df[df['State'] == 'IA'] 
+
+    # Group by city and count the occurrences of each city (fuel stations) 
+    city_station_counts = df_iowa.groupby('City').size().reset_index(name='station_count') 
+
+    # Sort the data to get the top 10 cities by station count 
+    city_station_counts = city_station_counts.sort_values(by='station_count', ascending=False).head(10) 
+
+    # Create a bar chart 
+    plt.figure(figsize=(10, 6)) 
+    plt.barplot(x='City', y='station_count', data=city_station_counts) 
+    plt.title('Total Number of Stations by City in Iowa') 
+    plt.ylabel('Number of Stations') 
+    plt.show() 
+
+def plot_station_counts_by_facility_type(df, 'Facility Type'): 
+    # Group by facility type and count the occurrences of each type (number of stations) 
+    facility_station_counts = df.groupby('Facility Type').size().reset_index(name='station_count') 
+
+    # Sort the data by the station count in descending order (optional) 
+    facility_station_counts = facility_station_counts.sort_values(by='station_count', ascending=False).head(10) 
+
+    # Create a bar chart 
+    plt.figure(figsize=(10, 6)) 
+    plt.barplot(x='Facility Type', y='station_count', data=facility_station_counts) 
+    plt.title('Number of Stations by Facility Type') 
+    plt.ylabel('Number of Stations') 
+    plt.show() 
