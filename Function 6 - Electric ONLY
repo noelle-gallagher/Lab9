@@ -1,0 +1,23 @@
+# Function to plot the map with stations colored by fuel type
+def plot_fuel_stations(df, fueltype_colors):
+    # Create a list to store colors for each row based on fuel type
+    colors = []
+    for fuel_type in df['Fuel Type Code']:
+        if fuel_type in fueltype_colors:
+            colors.append(fueltype_colors[fuel_type])
+        else:
+            colors.append('gray')
+
+    # Plotting the stations with different colors based on fuel types
+    plt.figure(figsize=(10, 6))
+    plt.scatter(df['Longitude'], df['Latitude'], c=colors, s=1, alpha=0.5)
+    plt.title('Location of Fuel Stations on the Map (highlighting Electric stations (cyan))')
+    plt.show()
+
+# Specify the colors for different fuel types
+fueltype_colors = {
+    'ELEC': 'cyan',  # Electric stations in cyan
+}
+
+# Plotting the map
+plot_fuel_stations(df, fueltype_colors)
